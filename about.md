@@ -1,42 +1,39 @@
 ---
 layout: page
-title: 关于我 
+title: 关于我
 ---
 
-一个 iOS SDK 开发者，喜欢研究一些新技术。
+一个在读研的小明哥，将平时学习的一点心得整理到这里。
 <p>
-平时喜欢整理个人博客，逛逛技术论坛。
+目前，在搞 多机器人、slam、路径规划 的方向。
 <p>
-了解一些 前端 基本概念和 Python 的简单用法。
-
-<p>
-
-<h3> 我们的博客 </h3>  
+我本科车辆，考研机械，幸运的是导师是做移动机器人算法的，于是，选择了去做算法！
 
 <p>
 
-是的，这个博客是我们大家的，目前已经有很大一部分人在使用我的博客模板了，我也很高兴大家使用我的模板。
+<h3> 博客目的 </h3>  
 
 <p>
 
-如果你想搭建一个跟我一样的博客，可以看我的 
-<a href="/2016/10/jekyll_tutorials1/"> Jekyll 搭建个人博客 </a>
-教程
+在这个博客里，主要是分享自己的学习过程中的一点小心得，以及遇到的问题以及解决方案。
 
 <p>
 
-有关于博客主题的建议和意见都可以提给我，让我们一起来打造一个精美的主题吧~ 
+会分享一些 C++ 刷题，ROS 使用，以及 路径规划 算法方面的体会。
 
-<p> 
+<p>
 
-博客源码在 <a target="_blank" href='https://github.com/leopardpan/leopardpan.github.io/'>Github</a> 上，你的 Star 是我更新的动力，谢谢~
+由于，自己水平有限，如果有读者发现博客里一些错误，欢迎指正。
 
-<p> 
+<p>
 
-<p> 
+顺便分享下，我的 <a href="https://github.com/sunjiaming2018" target="_blank">github</a> ，以及 <a href="https://www.jianshu.com/u/0ff89a925c52" target="_blank">简书</a> ,博客最下方，也有链接。
 
-<p> 
+<p>
+
+<p>
+
+<p>
 
 
 {% include comments.html %}
-
