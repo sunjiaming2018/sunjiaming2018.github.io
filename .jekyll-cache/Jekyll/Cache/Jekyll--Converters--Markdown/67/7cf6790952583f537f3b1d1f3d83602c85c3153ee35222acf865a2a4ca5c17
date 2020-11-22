@@ -1,0 +1,146 @@
+I"�<h3 id="安装mysql">安装Mysql</h3>
+
+<p>最近需要学习Mysql,下面记录在ubuntu18.04环境安装Mysql的过程。</p>
+
+<h3 id="1下载安装包">1.下载安装包</h3>
+
+<p><a href="https://dev.mysql.com/downloads/mysql/">官网</a></p>
+
+<ul>
+  <li>选择ubuntu18.04,64位；</li>
+  <li>下载地址，选择下图企鹅左边的DownloadsNow。</li>
+</ul>
+
+<p><img src="/images/post/2020-07-05-mysql+navicat/MySQL下载.png" /></p>
+
+<h3 id="2安装">2.安装</h3>
+
+<ul>
+  <li>输入命令
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dpkg -i mysql-apt-config_0.8.20-1_all.deb
+sudo apt update
+sudo apt install mysql-server
+</code></pre></div>    </div>
+  </li>
+  <li>输入root密码</li>
+</ul>
+
+<p><img src="/images/post/2020-07-05-mysql+navicat/root密码.png" /></p>
+
+<ul>
+  <li>选择默认加密</li>
+</ul>
+
+<h3 id="3测试">3.测试</h3>
+<p>输入命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql -u root -p
+
+</code></pre></div></div>
+<p>如下图示，则安装成功。
+<img src="/images/post/2020-07-05-mysql+navicat/MySQL-text.png" /></p>
+
+<h3 id="安装navicat">安装navicat</h3>
+
+<h4 id="1相关工具">1.相关工具</h4>
+<ul>
+  <li>navicat15-premium-cs.AppImage：Navicat 15 premium 官方简体中文试用版</li>
+  <li>navicat-patcher：补丁</li>
+  <li>navicat-keygen ：注册机</li>
+  <li>appimagetool-x86_64.AppImage：Linux 独立运行软件打包工具</li>
+</ul>
+
+<p><a href="https://pan.baidu.com/s/12zSYWC_CgaNZVxESTdg8zA">百度网盘下载地址</a>
+提取码：9rqw</p>
+
+<h4 id="2环境配置">2.环境配置</h4>
+<h5 id="安装-capstone">安装 capstone</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libcapstone-dev
+</code></pre></div></div>
+<h5 id="安装-keystone">安装 keystone</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install cmake
+git clone https://github.com/keystone-engine/keystone.git
+cd keystone
+mkdir build
+cd build
+../make-share.sh
+sudo make install
+sudo ldconfig
+</code></pre></div></div>
+<h5 id="安装-rapidjson">安装 rapidjson</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install rapidjson-dev
+</code></pre></div></div>
+<h4 id="3操作步骤">3.操作步骤</h4>
+<h5 id="1赋予执行权限">1.赋予执行权限</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x appimagetool-x86_64.AppImage
+chmod +x navicat-patcher
+chmod +x navicat-keygen
+</code></pre></div></div>
+<h5 id="2解压官方包">2.解压官方包</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir navicat15
+mount -o loop navicat15-premium-cs.AppImage navicat15
+cp -r navicat15 navicat15-patched
+</code></pre></div></div>
+<h5 id="3运行补丁">3.运行补丁</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir navicat15
+mount -o loop navicat15-premium-cs.AppImage navicat15
+cp -r navicat15 navicat15-patched
+</code></pre></div></div>
+<h5 id="4打包成独立运行软件">4.打包成独立运行软件</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./appimagetool-x86_64.Appimage navicat15-pathed navicat15-premium-cs-pathed.AppImage
+</code></pre></div></div>
+<h5 id="5运行补丁后软件包">5.运行补丁后软件包</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x navicat15-premium-cs-pathed.AppImage
+./navicat15-premium-cs-pathed.AppImage
+</code></pre></div></div>
+<h5 id="6运行注册机">6.运行注册机</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navicat-keygen --text ./RegPrivateKey.pem
+</code></pre></div></div>
+<ul>
+  <li>选择产品类型： 1 Premium</li>
+  <li>选择语言： 1 Simplified Chinese</li>
+  <li>选择版本： 15</li>
+  <li>生成序列号： 填写至软件注册页面，并在断网后选择手工激活
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[*] Serial number:
+NAVC-PJWW-BKN4-C4YW
+</code></pre></div>    </div>
+  </li>
+  <li>填写个人信息：
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[*] Your name: sunjiaming
+[*] Your organization: suda
+</code></pre></div>    </div>
+  </li>
+  <li>输入注册码： 复制软件激活页面注册码并粘贴此处
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[*] Input request code in Base64: (Double press ENTER to end)
+nqKkI0BtJR5Nq***==
+</code></pre></div>    </div>
+  </li>
+  <li>生成激活码： 复制Activation Code内容粘贴至软件激活页面</li>
+</ul>
+
+<h3 id="使用-navicat15-连接-mysql">使用 navicat15 连接 MySQL</h3>
+
+<ul>
+  <li>1.终端启动MySQL
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mysql -u root -p
+xxxxxx /*输入密码*/
+</code></pre></div>    </div>
+  </li>
+  <li>2.打开 navicat15
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /home/sun/Navicat15
+./navicat15-premium-cs-pathed.AppImage
+</code></pre></div>    </div>
+  </li>
+  <li>3.连接配置
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>新建连接
+连接名：mydb（随意命名）
+主机改为:127.0.0.1
+端口：3306
+用户名：root
+密码：123123（mysql用户密码）
+测试连接即可
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><img src="/images/post/2020-07-05-mysql+navicat/navicat连接mysql.png" /></p>
+:ET

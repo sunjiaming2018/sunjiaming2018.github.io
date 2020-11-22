@@ -1,0 +1,121 @@
+I"�<h3 id="c写的单链表操作">C++写的单链表操作</h3>
+
+<h4 id="maincpp">main.cpp</h4>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+using namespace std;
+class MyListForward{
+    struct ListNode {
+        int val;
+        ListNode* next;
+        ListNode(int x):val(x),next(nullptr){}
+    };
+    ListNode* head;
+public:
+    MyListForward():head(nullptr){}
+    //获得链表中第index个节点的值
+    int get(int index) {
+        int i=0;
+        ListNode* p=head;
+        while (p&amp;&amp;i&lt;index) {
+            p=p-&gt;next;
+            i++;
+        }
+        if (p) {
+            return p-&gt;val;
+        } else{
+            return -1;
+        }
+    }
+    //在表头插入一个值为val节点
+    void addAtHead(int val) {
+        ListNode* p=new ListNode(val);
+        p-&gt;next=head;
+        head=p;
+    }
+    //在表尾插入一个值为val节点
+    void addAtTail(int val) {
+        ListNode* p=new ListNode(val);
+        //如果表为空，新节点为表头也为表尾
+        if (head== nullptr) {
+            head=p;
+            return;
+        }
+        ListNode* q=head;
+        while (q-&gt;next) {
+            q=q-&gt;next;
+        }
+        q-&gt;next=p;
+    }
+    //在索引为index的节点前添加值为val的节点
+    void addAtIndex(int index,int val) {
+        ListNode* node=new ListNode(val);
+        if (index&lt;=0) {
+            node-&gt;next=head;
+            head=node;
+            return;
+        }
+        int i=0;
+        ListNode* p=head;
+        while (p&amp;&amp;i&lt;index-1) {
+            p=p-&gt;next;
+            i++;
+        }
+        if (p) {
+            node-&gt;next=p-&gt;next;
+            p-&gt;next=node;
+        }
+    }
+    //删除索引index的节点
+    void deleteAtIndex(int index) {
+        //1.如果index=0,直接删除头节点
+        if (index==0&amp;&amp;head!= nullptr) {
+            ListNode* del=head;
+            head=head-&gt;next;
+            delete del;
+            return;
+        }
+        int i=0;
+        ListNode* p=head;
+        //找index的前驱节点
+        while (p&amp;&amp;i&lt;index-1) {
+            p=p-&gt;next;
+            i++;
+        }
+        //2.index超过链表范围，无法删除
+        if (!p)return;
+        //3.index节点位子合适
+        if (p-&gt;next) {
+            ListNode* del=p-&gt;next;
+            p-&gt;next=del-&gt;next;
+            delete del;
+        }
+    }
+    int length(){
+        int i=0;
+        ListNode* p=head;
+        while (p) {
+            i++;
+            p=p-&gt;next;
+        }
+        return i;
+    }
+};
+int main() {
+    MyListForward mlf;
+    mlf.addAtIndex(0,10);
+    mlf.addAtIndex(0,20);
+    mlf.addAtIndex(1,30);
+    for (int i = 0; i &lt; mlf.length(); ++i) {
+        cout&lt;&lt;mlf.get(i)&lt;&lt;" ";
+    }
+    cout&lt;&lt;endl;
+    mlf.deleteAtIndex(1);
+    for (int i = 0; i &lt; mlf.length(); ++i) {
+        cout&lt;&lt;mlf.get(i)&lt;&lt;" ";
+    }
+    cout&lt;&lt;endl;
+    return 0;
+}
+}
+</code></pre>
+:ET

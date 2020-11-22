@@ -1,0 +1,145 @@
+I"�<h3 id="c写的双向链表操作">C++写的双向链表操作</h3>
+
+<h4 id="maincpp">main.cpp</h4>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+using namespace std;
+class MyList {
+private:
+    struct ListNode{
+        int val;
+        ListNode *next,*prev;
+        ListNode(int x):val(x),next(nullptr),prev(nullptr) {};
+    };
+
+private:
+    ListNode *head,*tail;
+    int size=0;//记录链表长度
+public:
+    MyList():size(0),head(nullptr),tail(nullptr) {}
+    //获取第index索引的值
+    int get(int index) {
+        int i=0;
+        ListNode* p=head;
+        while (p&amp;&amp;i&lt;index) {
+            p=p-&gt;next;
+            i++;
+        }
+        if (p)return p-&gt;val;
+        else return -1;
+    }
+    //头插
+    void addAtHead(int val) {
+        if (head!= nullptr) {
+            ListNode* node=new ListNode(val);
+            node-&gt;next=head;
+            head-&gt;prev=node;
+            head=node;
+        } else{
+            head=new ListNode(val);
+            tail=head;
+        }
+        ++size;
+    }
+    void addAtTail(int val) {
+        if (tail!= nullptr) {
+            ListNode* node=new ListNode(val);
+            node-&gt;prev=tail;
+            tail-&gt;next=node;
+            tail=node;
+        } else {
+            tail=new ListNode(val);
+            head=tail;
+        }
+        ++size;
+    }
+    void addAtIndex(int index,int val) {
+        if (index&lt;=0) {
+            addAtHead(val);
+            return;
+        }
+        if (index==size) {
+            addAtTail(val);
+            return;
+        }
+        if (index&gt;size) return;
+        ListNode *pre= nullptr,*cur= head;
+        int i=0;
+        while (cur&amp;&amp;i&lt;index) {
+            pre=cur;
+            cur=cur-&gt;next;
+            i++;
+        }
+        ListNode* node=new ListNode(val);
+        pre-&gt;next=node;
+        node-&gt;prev=pre;
+        node-&gt;next=cur;
+        cur-&gt;prev=node;
+        ++size;
+    }
+    //删除index链表
+    void deleteAtIndex(int index) {
+        if (!head) return;
+        if (index==0) {
+            ListNode* del=head;
+            head=head-&gt;next;
+            if (head) {//链表有2个以上节点
+                head-&gt;prev= nullptr;
+            } else {//链表只有一个节点
+                tail= nullptr;
+            }
+            delete del;
+            size--;
+            return;
+        }
+        if (index==size-1) {
+            ListNode* del=tail;
+            tail=tail-&gt;prev;
+            if (tail) {
+                tail-&gt;next= nullptr;
+            }
+            delete del;
+            size--;
+            return;
+        }
+        int i=0;
+        ListNode *pre= nullptr,*cur=head;
+        while (cur) {
+            if (i==index){
+                ListNode* del=cur;
+                pre-&gt;next=cur-&gt;next;
+                if (cur-&gt;next) {
+                    cur-&gt;next-&gt;prev=pre;
+                }
+                delete del;
+                size--;
+                return;
+            }
+            pre=cur;
+            cur=cur-&gt;next;
+            ++i;
+        }
+    }
+    int length() {
+        return size;
+    }
+};
+int main() {
+    MyList ml;
+    ml.addAtHead(1);
+    ml.addAtTail(3);
+    ml.addAtHead(4);
+    ml.addAtHead(5);
+    ml.addAtIndex(1,2);
+    for (int i = 0; i &lt; ml.length(); ++i) {
+        cout&lt;&lt;ml.get(i)&lt;&lt;" ";
+    }
+    cout&lt;&lt;endl;
+    ml.deleteAtIndex(1);
+    for (int j = 0; j &lt; ml.length(); ++j) {
+        cout&lt;&lt;ml.get(j)&lt;&lt;" ";
+    }
+    cout&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
+:ET

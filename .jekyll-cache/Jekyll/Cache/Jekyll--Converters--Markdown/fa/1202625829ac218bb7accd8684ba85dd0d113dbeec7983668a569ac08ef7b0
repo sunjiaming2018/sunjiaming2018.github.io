@@ -1,0 +1,137 @@
+I"�<h3 id="c写的顺序表操作">C++写的顺序表操作</h3>
+<h4 id="seqlisth">SeqList.h</h4>
+<pre><code class="language-C++">#ifndef SEQ_LIST_SEQLIST_H
+#define SEQ_LIST_SEQLIST_H
+
+#include &lt;iostream&gt;
+using namespace std;
+const int DefaultSize = 100;
+
+template &lt;class T&gt;
+class SeqList
+{
+public:
+    SeqList(int sz = DefaultSize)
+            :m_nmaxsize(sz),m_ncurrentsize(-1)
+    {//初始化顺序表
+        if(sz &gt; 0)
+        {
+            m_element = new T[m_nmaxsize];
+        }
+    }
+    ~SeqList()
+    {
+        delete[] m_element;
+    }
+    int Length() const;////获取顺序表长度
+    int Find(T x) const;//找到元素 x 的位置
+    int IsElement(T x) const; //顺序表中是否存在元素x
+    int Insert(T x,int i);//插入元素x
+    int Delete(T x);//删除元素x
+    void Print();
+
+private:
+    T* m_element;
+    const int m_nmaxsize;
+    int m_ncurrentsize;
+};
+
+template&lt;class T&gt;
+int SeqList&lt;T&gt;::Length() const
+{
+    cout&lt;&lt;m_ncurrentsize+1&lt;&lt;endl;
+    return 0;
+}
+
+template&lt;class T&gt;
+int SeqList&lt;T&gt;::Find(T x) const
+{
+    for(int i = 0 ;i &lt; m_ncurrentsize; i++)
+    {
+        if(m_element[i] == x)
+            cout&lt;&lt;i&lt;&lt;": "&lt;&lt;m_element[i]&lt;&lt;endl;
+            return i;
+    }
+    cout &lt;&lt; "没有找到你想要的元素" &lt;&lt; endl;
+    return -1;
+}
+
+template&lt;class T&gt;
+int SeqList&lt;T&gt;::Insert(T x, int i)
+{
+    if(i &lt; 0 || i &gt; m_ncurrentsize + 1 || m_ncurrentsize == m_nmaxsize - 1)
+    {
+        cout &lt;&lt; "非法操作" &lt;&lt; endl;
+        return 0;
+    }
+    m_ncurrentsize ++;
+
+    for(int j = m_ncurrentsize; j &gt;i; j --)
+    {
+        m_element[j] = m_element[j-1];
+    }
+    m_element[i] = x;
+    return 1;
+}
+
+template&lt;class T&gt;
+int SeqList&lt;T&gt;::Delete(T x)
+{
+    int nsize = m_ncurrentsize;
+    for(int i = 0; i&lt; m_ncurrentsize; i++)
+    {
+        if(m_element[i] == x)
+        {
+            for(int j = i; j &lt; m_ncurrentsize; j ++)
+            {
+                m_element[j] = m_element[j+1];
+            }
+            m_ncurrentsize --;
+            continue;
+        }
+    }
+    if(nsize == m_ncurrentsize)
+    {
+        cout &lt;&lt; "没有找到你想要删除的元素" &lt;&lt; endl;
+        return 0;
+    }
+    return 1;
+}
+
+template&lt;class T&gt;
+void SeqList&lt;T&gt;::Print()
+{
+    for(int i = 0 ;i &lt;= m_ncurrentsize;i ++)
+    {
+        cout &lt;&lt; i + 1 &lt;&lt; ":\t" &lt;&lt; m_element[i] &lt;&lt; endl;
+    }
+
+}
+
+
+#endif //SEQ_LIST_SEQLIST_H
+</code></pre>
+
+<h4 id="maincpp">main.cpp</h4>
+<pre><code class="language-C++">#include &lt;iostream&gt;
+#include "SeqList.h"
+using namespace std;
+int main() {
+    SeqList&lt;int&gt; list;
+
+    int a[15] = {4,8,8,2,9,1,7,6,4,3,2,9,11,7,9};
+    for(int i = 0; i&lt; 15 ;i ++)
+    {
+        list.Insert(a[i],i);
+    }
+    list.Print();
+    list.Delete(9);
+    list.Print();
+    list.Length();//计算当前顺序表长度
+    return 0;
+}
+</code></pre>
+
+<p>参考
+1.https://www.cnblogs.com/JczmDeveloper/archive/2013/03/24/2978297.html</p>
+:ET

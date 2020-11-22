@@ -1,0 +1,6 @@
+I"�<h3 id="c写的顺序表操作">C++写的顺序表操作</h3>
+<h4 id="seqlisth">SeqList.h</h4>
+<p>```C++
+#ifndef SEQ_LIST_SEQLIST_H
+#define SEQ_LIST_SEQLIST_H</p>
+:ET

@@ -1,0 +1,87 @@
+I"<h3 id="c写的广度优先实例">C++写的广度优先实例</h3>
+
+<h4 id="maincpp">main.cpp</h4>
+<pre><code class="language-C++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+struct point {
+    int x;
+    int y;
+    int step;
+};
+//0为图外
+//1为可走
+//2为障碍
+int n;//图大小
+int a[110][110];//地图
+int b[100][100];//保存已走点
+/*
+5
+1 1 2 1 1
+1 1 2 2 2
+1 2 3 2 2
+1 1 1 1 1
+1 2 1 2 1
+*/
+queue &lt;point&gt; q;
+int main(){
+    cin &gt;&gt; n;
+    for (int i=1;i&lt;=n;i++) {
+        for (int j=1;j&lt;=n;j++) {
+            cin &gt;&gt; a[i][j];
+        }
+    }
+//广搜
+    point start = {1,1,0};//起始点
+    point tmp;//交换辅助点
+    q.push(start);
+    while (q.empty()==0) {
+        //取头队列点
+        int x = q.front().x;
+        int y = q.front().y;
+        int step = q.front().step;
+        //到达目的点,退出
+        if (x==n&amp;&amp;y==n) {
+            cout &lt;&lt; step;
+            break;
+        }
+//上
+        if (a[x-1][y]==1&amp;&amp;b[x-1][y]==0) {
+            tmp.x=x-1;
+            tmp.y=y;
+            tmp.step=step+1;
+            q.push(tmp);
+            b[x-1][y]=1;
+        }
+//下
+        if (a[x+1][y]==1&amp;&amp;b[x+1][y]==0) {
+            tmp.x=x+1;
+            tmp.y=y;
+            tmp.step=step+1;
+            q.push(tmp);
+            b[x+1][y]=1;
+        }
+//左
+        if (a[x][y-1]==1&amp;&amp;b[x][y-1]==0) {
+            tmp.x=x;
+            tmp.y=y-1;
+            tmp.step=step+1;
+            q.push(tmp);
+            b[x][y-1]=1;
+        }
+//右
+        if (a[x][y+1]==1&amp;&amp;b[x][y+1]==0) {
+            tmp.x=x;
+            tmp.y=y+1;
+            tmp.step=step+1;
+            q.push(tmp);
+            b[x][y+1]=1;
+        }
+        //把完成遍历4个方向的点出队列
+        q.pop();
+    }
+    return 0;
+}
+
+
+</code></pre>
+:ET

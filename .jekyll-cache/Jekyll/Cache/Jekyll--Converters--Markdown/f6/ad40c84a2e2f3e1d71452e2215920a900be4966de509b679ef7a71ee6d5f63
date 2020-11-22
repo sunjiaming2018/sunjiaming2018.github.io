@@ -1,0 +1,139 @@
+I"<h3 id="206-反转链表">206. 反转链表</h3>
+
+<h4 id="1题目描述">1.题目描述</h4>
+<p>反转一个单链表。</p>
+
+<p>示例 1：</p>
+<ul>
+  <li>输入：<br />
+输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</li>
+</ul>
+
+<p>进阶：</p>
+<ul>
+  <li>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</li>
+</ul>
+
+<p>来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/reverse-linked-list/
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+
+<h4 id="2迭代法代码">2.[迭代法]代码</h4>
+<pre><code class="language-C++">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class solution{
+public:
+  ListNode* reverseList(ListNode* head) {
+    ListNode* first=head;
+    ListNode* target=head-&gt;next;
+    while (target!=nullptr) {
+      first-&gt;next=target-&gt;next;
+      target-&gt;next=head;
+      ListNode* tmp=target-&gt;next;
+      head=target;
+      target=tmp;
+    }
+    return head;
+  }
+}
+</code></pre>
+
+<h4 id="3递归法代码">3.[递归法]代码</h4>
+<pre><code class="language-C++">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class solution {
+public:
+  ListNode* reverseList(ListNode* head) {
+    if (!head||!head-&gt;next) {
+      return head;
+    }
+    ListNode* p=reverseList(ListNode* head-&gt;next);
+    head-&gt;next-&gt;next=head;
+    head-&gt;next=null;
+    return p;
+  }
+}
+</code></pre>
+<h3 id="203-移除链表元素">203. 移除链表元素</h3>
+
+<h4 id="1题目描述-1">1.题目描述</h4>
+<p>删除链表中等于给定值 val 的所有节点。<br />
+示例：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6
+输出: 1-&gt;2-&gt;3-&gt;4-&gt;5
+</code></pre></div></div>
+<p>来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/remove-linked-list-elements/
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="2哑节点代码">2.[哑节点]代码</h4>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">ListNode</span><span class="o">*</span> <span class="n">removeElements</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">ListNode</span><span class="o">*</span> <span class="n">dummy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+      <span class="n">dummy</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+      <span class="n">ListNode</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">dummy</span><span class="p">;</span>
+      <span class="k">while</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">=</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+          <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="n">ListNode</span><span class="o">*</span> <span class="n">res</span><span class="o">=</span><span class="n">dummy</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+      <span class="k">delete</span> <span class="n">dummy</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<h4 id="3迭代代码">3.[迭代]代码</h4>
+<pre><code class="language-C++">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+      if (!head) {//空链
+        return NULL;
+      }
+      ListNode* p=head;
+      while (p-&gt;next) {
+        if (p-&gt;next-&gt;val==val) {
+          p-&gt;next=p-&gt;next-&gt;next;
+        }else {
+          p=p-&gt;next;
+        }
+      }
+      return head-&gt;val=val ? head-&gt;next : head;//头结点为目标值删除
+    }
+};
+</code></pre>
+:ET

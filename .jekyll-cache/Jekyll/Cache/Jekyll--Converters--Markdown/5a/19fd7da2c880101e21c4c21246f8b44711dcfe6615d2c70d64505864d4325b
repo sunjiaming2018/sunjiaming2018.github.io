@@ -1,0 +1,20 @@
+I"J<h3 id="超级好用的梯子">超级好用的梯子</h3>
+
+<p>最近，装上ubuntu18.04，一般网上都是用ss-qt5搭梯子，我弄了很久没法使用，后来，发现一个超级好用的梯子，electron-ssr，原作者github链接上的资源，已经挂掉了，但是，有网友还是copy了。该网友<a href="https://github.com/qingshuisiyuan/electron-ssr-backup">github地址</a></p>
+
+<h3 id="1下载安装">1.下载安装</h3>
+
+<p><a href="https://github.com/qingshuisiyuan/electron-ssr-backup/releases">地址</a></p>
+
+<p>我是ubuntu18.04,选择xxx.deb文件下载，双击安装。</p>
+
+<h3 id="2配置">2.配置</h3>
+
+<p>代理需要自己去弄了，复制订阅地址，添加到小飞机中，和win中操作一样。目前，还不能上谷歌，需要配置系统网络代理,设置&gt;网路&gt;网路代理&gt;自动。
+<img src="/images/post/ele-ssr/peizhiwangluo.png" height="350" width="600" /></p>
+
+<h3 id="3测试">3.测试</h3>
+
+<p>进入浏览器，登入谷歌，顺利进入。
+<img src="/images/post/ele-ssr/登录谷歌.png" height="350" width="600" /></p>
+:ET
